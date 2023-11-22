@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<body>
+	<main style="margin-top: 150px; margin-bottom: 50px;" class="container">
+		<div th:object="${item}">
+			<div class="container image-container">
+				<img th:src="@{|/assets/images/*{hinhanh2}|}" style="width: 100%; height: 250px;" alt="">
+				<div class="text-overlay">
+					<h1 class="display-5">Dịch Vụ TAMA STUDIO</h1>
+					<p class="lead">Chúng tôi hoàn toàn có thể đặt niềm tin, nơi cho bạn những góc nhìn khác về vẻ đẹp
+						của bạn.</p>
+				</div>
+			</div>
+
+			<!-- Features Section -->
+			<div class="container features py-5">
+				<div class="row">
+					<div class="col-lg-4">
+						<h3>Thông Tin Chi Tiết</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4 mt-2">
+						<h5>Giá Gói</h5>
+					</div>
+					<div class="col-lg-4 mt-2">
+						<h5>[[*{gia}]] vnđ</h5>
+					</div>
+					<hr>
+				</div>
+				<div class="row">
+					<div class="col-lg-4 mt-2">
+						<h5>[[*{ten}]]</h5>
+					</div>
+					<div class="col-lg-4 mt-2">
+						<div style="width: 330px;">					
+							<h6>[[*{noidung}]]</6>
+						</div>		
+					</div>
+					<hr>
+				</div>
+				<div class="row">
+					<div class="col-lg-4 mt-2">
+						<h5>Lưu ý</h5>
+					</div>
+					<div class="col-lg-5 mt-2">
+						<p>[[*{luuy}]]</p>
+					</div>
+					<hr>
+				</div>
+				<div class="row">
+					<div class="col-lg-4 mt-2">
+						<h5>Liên hệ</h5>
+					</div>
+					<div class="col-lg-4 mt-2">
+						<p>[[*{lienhe}]]</p>
+					</div>
+					<hr>
+				</div>
+				<div class="row">
+					<div class="col-lg-4 mt-2">
+						<h5>Video Tham Khảo</h5>
+					</div>
+					<div>
+						<iframe width="100%" height="550"
+							th:src="@{|https://www.youtube.com/embed/*{href}|}"
+							></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+
+</html>

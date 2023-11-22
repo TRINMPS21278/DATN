@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<body>
+
+	<main style="margin-top: 150px; margin-bottom: 50px;" class="container">
+	<div th:object="${sp}">
+ <div style="float: left; width: 40% ;">
+            <img th:src="@{|/assets/images/37305818_493973964395212_7682163292298543104_n.jpg|}" class="ctsp" alt="" width="500px" height="650px">
+        </div>
+        <div style="float: right; width: 59%; border-radius: 20px;  height: 650px; padding-top: 100px; ">
+            <p style="padding-left: 70px;padding-right: 70px;">
+                <h3 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                font-style: italic;">[[*{tensp}]]</h3>
+               <b>Mã :</b> [[*{masp}]]
+                <br>
+                <br><i class="bi bi-currency-dollar"></i> <b>giá:</b> <b style="color: red;">[[*{#numbers.formatDecimal(gia, 0, 'COMMA', 0, 'POINT')}]] </b><u>Đ</u><br>
+                <br><i class="bi bi-pass-fill"></i> [[*{noidung}]]
+                <br> [[*{mota}]]
+                <br>
+                <br><h4>Liên hệ</h4>
+                <i class="bi bi-telephone-fill"></i> [[*{taikhoan.sdt}]]
+                <br><i class="bi bi-envelope-at-fill"></i> [[*{taikhoan.email}]]
+            </p>
+            <div style="padding-left: 250px; padding-top: 100px;">
+                <button class="btn btn-outline-secondary" th:attr="ng-click=@{|cart.add(*{id})|}" style="border-radius: 25px;background-color: #d9d9d9"><i class="bi bi-cart4"></i> Thêm vào giỏ hàng</button>
+            </div>
+        </div>
+        
+        <h3 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-style: italic;">Bình luận</h3>
+        <div style="clear:both; background-color: #d9d9d9;border-radius: 10px;">
+            <p style="padding: 10px;" th:each="entry: ${bl}" th:object="${entry}">
+                <i class="bi bi-person-square"></i> [[*{taikhoan.ten}]]
+                <br>[[*{noidung}]]<br>
+            </p>
+        </div>
+        <div th:if="${session.message}" class="container">
+				     <div class="alert alert-success my-2 text-center" role="alert">
+				       <span th:text="${session.message}"></span>	     
+				     </div>
+				     <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+				  </div>
+         <br>
+       		<form action="/lephuc/binhluan/{id}" method="post">
+        
+        		<textarea name=noidung class="form-control" 
+        		placeholder="Nhập nội dung bình của bạn vào đây"></textarea>		
+  		  <br>
+        		<button class="btn btn-primary fw-bold"  th:formaction="@{|/lephuc/binhluan/${id}|}" 
+        		type="submit"
+				data-bs-toggle="modal" data-bs-target="#exampleModal">Gửi</button>	
+        	</form>
+        
+		<h3 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-style: italic;">Cùng loại [[*{loai.ten}]] </h3>
+		<div class="row row-cols-1 row-cols-md-4 g-2">
+        
+            <div class="col1" th:each="entry: ${cl}" th:object="${entry}">
+            <a th:href="@{|/lephuc/ctlephuc/*{id}|}">
+                <img th:src="@{|/assets/images/37305818_493973964395212_7682163292298543104_n.jpg|}" class="cover" alt="">
+                </a>
+                <div class=" h-100 p-2" id="hover_anh1">
+                    <div class="card-body text-center m-auto w-100">
+                        <a th:href="@{|/lephuc/ctlephuc/*{id}|}">
+                            <img th:src="@{|/assets/images/37305818_493973964395212_7682163292298543104_n.jpg|}" class="card-img-top1">
+                        </a>
+                        <h6 class="card-title mt-3"> [[*{tensp}]]</h6>
+                        <p class="card-text1">Giá:[[*{gia}]] Đ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+         </div>
+	</main>
+</body>
+
+</html>

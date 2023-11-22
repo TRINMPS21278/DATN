@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<body>
+	<main style="margin-top: 150px; margin-bottom: 50px;" class="container">
+		<div class="card border border-2" th:fragment="shopping-cart">
+			<div class="card-header text-center text-danger" style="background-color: aliceblue;">
+				<h3 style=" font-weight: bold;" >GIỎ HÀNG</h3>
+			</div>
+			<div class="card-body">
+				<table class="table table-hover text-center">
+					<thead>
+						<tr>
+							<th style="width: 16%;" >Mã</th>
+							<th style="width: 16%;">Tên</th>
+							<th style="width: 16%;">Giá</th>
+							<th style="width: 16%;">Số lượng</th>
+							<th style="width: 16%;">Thành tiền</th>
+							<th style="width: 16%;">Tùy chọn</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in  cart.items">
+							<td>{{item.id}}</td>
+							<td>{{item.tensp}}</td>
+							<td>{{item.gia|number}} Đ</td>
+							<td><input ng-change="cart.saveToLocalStorage()" ng-model="item.qty" type="number" min="1"
+									style="width: 60px;"></td>
+							<td>{{item.qty*item.gia|number}} Đ</td>
+							<td>
+								<button ng-click="cart.remove(item.id)" class="btn btn-danger">
+									<i class="bi bi-trash"></i>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="card-footer text-body-secondary" style="background-color: aliceblue;">
+				<div class="row">
+					<div class="col-6 d-flex flex-row p-2"><button ng-click="cart.clear()" type="button" class="btn btn-outline-danger"><i
+								class="bi bi-trash">Xóa tất cả</i></button></div>
+					<div class="col-6 d-flex flex-row-reverse p-2">
+						
+							<th:block th:if="${#request.remoteUser}" >
+							<a th:href="@{/donhang/checkout}" type="button"
+							class="btn btn-outline-warning mx-5">
+							<i class="bi bi-box-arrow-right"></i>Thanh toán
+						 </a>
+							
+							</th:block>
+						
+						<h4 class="mx-4 mt-2 text-danger" >Tổng tiền: {{cart.amount|number}} Đ</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+
+
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+
+<body>
+	<main style="margin-top: 100px">
+		<div class="container">
+		<div class="card-header">
+		<h3 class="mt-2" style="text-align: center;">Quản Lí Bình Luận</h3>
+	</div>
+		<br>
+		<hr>
+		<!-- <form th:action="@{/admin/editBinhLuan}" method="post">
+				<input name="noidung" placeholder="noidung"><br />
+				<hr />
+				<button th:formaction="@{/binhluan/create}">Create</button>
+			</form> -->
+			
+			
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Nội dung</th>
+						<th scope="col">Khách Hàng</th>
+						<th scope="col">Sản Phẩm</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="entry: ${b}" th:object="${entry}">
+						<th scope="row">[[*{id}]]</th>
+						<td>[[*{noidung}]]</td>
+						<td>[[*{taikhoan.ten}]]</td>
+						<td>[[*{sanpham.tensp}]]</td>
+						<td><a th:href="@{|/binhluan/delete/*{id}|}">Delete</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main>
+</body>

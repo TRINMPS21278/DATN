@@ -1,0 +1,54 @@
+
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/admin/index :: dynamic(~{::main})}">
+<body>
+	<main style="margin-top: 40px">
+		<div class="container">
+		<div class="card-header">
+		<h3 class="mt-2" style="text-align: center;">Quản Lí Loại Hàng Của Sản Phẩm</h3>
+	</div>
+			<br>
+			<hr>
+			<form  method="post" th:object="${l1}">
+			  <div class="mb-3">
+			    <label for="exampleInputEmail1" class="form-label">Tên Loại :</label>
+			    <input th:field="*{ten}" path="ten" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+			  </div>
+			 
+			    <button class="btn btn-primary" th:formaction="@{/loai/create}">Create</button>
+				<button class="btn btn-success" th:formaction="@{|/loai/update/${id}|}">Update</button>
+				<button class="btn btn-danger" th:formaction="@{|/loai/delete/${id}|}">Delete</button>
+				<button class="btn btn-warning" th:formaction="@{/admin/editLoai}">Reset</button>
+			</form>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Tên</th>
+						<th scope="col"></th>
+						<th scope="col"></th>
+						<th scope="col"></th>
+						<th scope="col"></th>
+						<th scope="col">Điều Chỉnh</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="entry: ${l}" th:object="${entry}">
+						<th scope="row">[[*{id}]]</th>
+						<td>[[*{ten}]]</td>
+						<td> </td>
+						<td> </td>
+						<td> </td>
+						<td> </td>
+						<td>
+						<button class="btn btn-secondary" ><a th:href="@{|/loai/edit/*{id}|}">Edit</a> </button>
+						<button class="btn btn-secondary" > <a th:href="@{|/loai/delete/*{id}|}">Delete</a></button>
+						
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main>
+</body>

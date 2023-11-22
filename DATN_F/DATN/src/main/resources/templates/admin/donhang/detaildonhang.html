@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+	<body>
+		<main th:object="${donhang}" style="margin-top: 10px; margin-bottom: 50px;">
+			<form th:action="@{/admin/donhang/update}" th:object="${donhang}" method="post">
+			<div>
+				<a type="button" class="btn btn-primary"
+					th:href="@{/admin/donhang/list}">Quay lại đơn hàng</a>
+					<button class="btn btn-success" style="width: 10%;" >Lưu</button>
+					<a th:href="@{|/admin/donhang/delete/*{id}|}" class=" btn btn-danger" style="width: 10%;">Xóa</a>
+			</div>
+			<div class="card my-3">
+				<div class="card-header text-center text-danger"
+					style="background-color: aliceblue;">
+					<h3 style="font-weight: bold;">THÔNG TIN ĐƠN HÀNG</h3>
+				</div>
+				<div class="card-body m-auto"
+					style="font-size: 18px; width: 90%;">
+					<div class="">						
+							<div class="form-floating my-5" style="display: none;">
+								<input th:field="*{id}" type="text" class="form-control">
+							</div>
+							<div class="form-floating mb-3" style="display: none;">
+								<input th:field="*{taikhoan.taikhoan}" type="text" class="form-control">
+							</div>
+
+							<div class="form-floating mb-3" style="display: none;">
+								<input th:field="*{ngaytao}" type="text" class="form-control">
+							</div>
+							<div class="form-floating mb-3" style="display: none;">
+								<input th:field="*{tongtien}" type="text" class="form-control">
+							</div>
+							<div class="form-floating mb-3" style="display: none;">
+								<input th:field="*{diachi}" type="text" class="form-control">
+							</div>
+							
+							<div class="text-center ">
+								<div class style="font-size: 25px;">MÃ ĐƠN HÀNG: <b th:text="*{id}"></b></div>
+							</div>
+							<div class="row my-3">
+								<div class="col-4">Tên khách hàng: <b th:text="*{taikhoan.ten}"></b></div>
+								<div class="col-4">Số điện thoại: <b th:text="*{taikhoan.sdt}"></b></div>
+								<div class="col-4">Email: <b th:text="*{taikhoan.email}"></b></div>
+							</div>
+							<div class="row my-3">
+								<div class="col-4">Ngày đặt: <b th:text="*{ngaytao}"></b> </div>
+								<div class="col-8 row">
+									<label for="inputdc" class="col-sm-2">Địa chỉ:</label>
+									<div class="col-sm-10"> <b th:text="*{diachi}"></b> </div>
+								</div>
+							</div>
+							<div class="row my-3">
+								<label class="col-2">Trạng thái:</label>
+								<div class="col-4">
+								<select th:field="*{trangthai}" class="form-select " aria-label="Default select example">
+									<option th:each="c:${trangthais}" th:value="${c.key}">[(${c.value})]</option>
+								</select>
+								</div>
+								
+							</div>
+						<div>
+							<table class="table table-hover text-center">
+								<thead>
+									<tr>
+										<th style="width: 5%;" >Mã</th>
+										<th style="width: 45%;">Tên</th>
+										<th style="width: 25%;">Giá</th>
+										<th style="width: 10%;">Số lượng</th>
+										<th style="width: 15%;">Thành tiền</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="detail: *{chitietdonhangs}" th:object="${detail}">
+										<td>[[*{sanpham.id}]]</td>
+										<td>[[*{sanpham.tensp}]]</td>
+										<td>[[*{#numbers.formatDecimal(gia, 0, 'COMMA', 0, 'POINT')}]] Đ</td>
+										<td>[[*{soluong}]]</td>
+										<td>[[*{#numbers.formatDecimal(gia*soluong, 0, 'COMMA', 0, 'POINT')}]]
+											Đ</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="text-center" th:each="order, state: ${donhang}">
+						<b>Tổng tiền: [[${#numbers.formatDecimal(order.tongtien, 0, 'COMMA', 0,
+							'POINT')}]] ĐỒNG</b>
+					</div>
+				</div>
+
+			</div>
+		</form>
+		</main>
+	</body>
+
+</html>

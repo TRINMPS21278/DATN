@@ -1,0 +1,67 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+
+<body>
+	<main  ng-app="account-app" ng-controller="account-ctrl"   >
+		<div class="card"  >
+    <div class="card-header">
+        <h3 class="mt-2" style="text-align: center;">Chỉnh Sửa Tài Khoản</h3>
+    </div>
+    <div class="card-body">
+    	<div class="row">
+    		<div class="col-sm-4 text-center">
+    			<label for="image">
+    				<img ng-src="/assets/images/logo_tama.png" style="max-width: 150%"  height="180px" />
+    			</label>
+    		</div>
+    		<div class="col-sm-8"  >
+    			<div class="row">
+    				<div class="form-group col-sm-6">
+    					<label>Tài Khoản</label>
+    					<input ng-model="form.taikhoan" class="form-control"/>
+    				</div>
+    				<div class="form-group col-sm-6">
+    					<label>Mật Khẩu</label>
+    					<input ng-model="form.matkhau" class="form-control" type="password"/>
+    				</div>
+    				<div class="form-group col-sm-6">
+    					<label>Họ Tên</label>
+    					<input ng-model="form.ten" class="form-control"/>
+    				</div>
+    				<div class="form-group col-sm-6">
+    					<label>Email</label>
+    					<input ng-model="form.email" class="form-control" type="email"/>
+    				</div>
+    				<div class="form-group col-sm-6">
+    					<label>Giới Tính</label>
+    					<input ng-model="form.gioitinh" class="form-control" />
+    				</div>
+    				<div class="form-group col-sm-6">
+    					<label>Số Điện Thoai</label>
+    					<input ng-model="form.sdt" class="form-control" />
+    				</div>
+    			</div>
+    			<div class="row">
+    				<div class="form-group col-sm-6">
+    					<label>Chức Năng</label>
+    					<div class="form-control">
+    						<div class="form-check ps-0">
+						      	<label ng-repeat="r in roles" class="form-check-label me-2" for="inlineFormCheck">
+						      	<input ng-model="selectedRole" ng-value="r" class="form-check-input1" type="checkbox" id="inlineFormCheck" ng-checked="selection.indexOf(r)>-1" ng-click="toggleRole(r)">
+							        {{r.name}}
+							     </label>
+						    </div>
+    					</div>
+    				</div>
+    			</div>
+    			
+    		</div>
+    	</div>
+    </div>
+    <div class="card-footer text-center">
+    	<button ng-click="create()" class="btn btn-primary"><b class="fa-solid fa-square-plus"></b> Create</button>
+    	<button ng-click="reset()" class="btn btn-info"><b class="fa-solid fa-rotate"></b> Reset</button>
+    </div>
+</div>
+	</main>
+</body>

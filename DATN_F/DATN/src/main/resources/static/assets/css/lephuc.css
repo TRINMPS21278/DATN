@@ -1,0 +1,56 @@
+.ctsp {
+            border-radius: 25px;
+            box-shadow: 0 0 5px aliceblue, 0 0 7px rgb(192, 192, 192);
+            
+        }
+        #hover_anh1{
+			transition: transform 1s;
+		}
+        
+        #hover_anh1:hover {
+            box-shadow: 0 0 5px aliceblue, 0 0 7px rgb(192, 192, 192);
+            transform: translateY(-2px);
+            border: 1px;
+            border-radius: 10px;
+            
+        }
+        
+        .cover {
+            position: absolute;
+            width: 98%;
+            height: 98%;
+            z-index: 1000;
+            display: none;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+        
+        .col1:hover>.cover {
+            display: block;
+        }
+        
+        .col1 {
+            position: relative;
+        }
+        
+        .card-title mt-3 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-style: italic;
+        }
+        
+        .card-img-top1 {
+            width: 90%;
+            height: 80%;
+            border-radius: 10px;
+        }
+        
+        .card-text1 {
+            color: red;
+            font-weight: bold;
+        }
+        
+        .check {
+            padding-left: 520px;
+            padding-top: 50px;
+            padding-bottom: 100px;
+        }

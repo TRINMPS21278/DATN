@@ -1,0 +1,143 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+
+<body>
+	<main  ng-app="product-app" ng-controller="product-ctrl">
+		<div class="card border-success mb-3">
+		<div class="card-header">
+		<h3 class="mt-2" style="text-align: center;">Danh Sách Tài Khoản</h3>
+	</div>
+			<div class="card-body text-success">
+				<table class="table table-condensed">
+					<thead class="bg-success" style="font-variant: small-caps;">
+						<tr>
+							<th>Id</th>
+							<th>Name</th>
+							<th>Mô tả</th>
+							<th>Nội dung</th>
+							<th>Image</th>
+							<th>giá</th>
+							<th>Loại</th>
+							<th>Mã sản phẩm</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in pager.items">
+							<td>{{item.id}}</td>
+							<td>{{item.tensp}}</td>
+							<td>{{item.mota}}</td>
+							<td>{{item.noidung}}</td>
+							<td>{{item.hinh}}</td>
+							<td>{{item.gia}}</td>
+							<td>{{item.loai.ten}}</td>
+							<td>{{item.masp}}</td>
+							<td>
+								<div class="btn-group btn-group-xs">
+									<a ng-click="edit(item)" href="" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-warning"> <i
+										class="bi bi-pencil-square"></i>
+									</a>
+									
+									<!-- Modal -->
+						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h1 class="modal-title fs-5" id="exampleModalLabel">Sửa thông tin của sản phẩm</h1>
+						        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						      </div>
+						      <div class="modal-body">
+						       <div class="col"  >
+						       <div class="card-body text-success">
+				<div class="row">
+					<div class="col-sm-6 text-center">
+						<label for="image"> <img
+							ng-src="{{'/assets/images/+form.hinh'}}"
+							style="max-width: 100%; height: 200px">
+						</label>
+					</div>
+					<div class="col-sm-10">
+						<div class="row">
+							<div class="form-group col-sm-10">
+								<div>Name</div>
+								<input ng-model="form.tensp" class="form-control">
+							</div>
+							<div class="form-group col-sm-10">
+								<div>Mô tả</div>
+								<input ng-model="form.mota" class="form-control">
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-sm-10">
+								<div>Image</div>
+								<input type="file" class="form-control" id="image"
+									onchange="angular.element(this).scope().imageChanged(this.files)">
+							</div>
+							<div class="form-group col-sm-10">
+								<div>Loai</div>
+								<select ng-model="form.loai.id" class="form-control">
+									<option ng-repeat="c in categories" ng-value="c.id">{{c.ten}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-sm-10">
+								<div>Nôi dung</div>
+								<input ng-model="form.noidung" class="form-control">
+							</div>
+							<div class="form-group col-sm-6">
+								<div>Gía</div>
+								<input ng-model="form.gia" class="form-control">
+							</div>
+							<div class="form-group col-sm-10">
+								<div>Mã sản phẩm</div>
+								<input ng-model="form.masp" class="form-control">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+    			
+    			
+    		                  </div>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+						        <button  ng-click="update()" class="btn btn-primary">Cập Nhập</button>
+						      </div>
+						    </div>
+						  </div>
+						</div> 
+									
+									
+									<a ng-click="delete(item)" href="" class="btn btn-danger">
+										<i class="bi bi-trash3"></i>
+									</a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="card-footer bg-transparent border-success">
+				<div class="panel-footer text-center">
+					<button ng-click="pager.first()" class="btn btn-danger">
+						<i class="bi bi-caret-left-square"></i>
+					</button>
+					<button ng-click="pager.prev()" class="btn btn-primary">
+						<i class="bi bi-caret-left-fill"></i>
+					</button>
+					<button class="btn btn-success">{{pager.page + 1}} of
+						{{pager.count}}</button>
+					<button ng-click="pager.next()" class="btn btn-primary">
+						<i class="bi bi-caret-right-fill"></i>
+					</button>
+					<button ng-click="pager.last()" class="btn btn-danger">
+						<i class="bi bi-caret-right-square"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>

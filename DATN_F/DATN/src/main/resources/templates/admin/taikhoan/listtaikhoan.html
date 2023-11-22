@@ -1,0 +1,107 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index :: dynamic(~{::main})}">
+
+<body>
+	<main  ng-app="account-app" ng-controller="account-ctrl">
+		<div class="card" >
+	<div class="card-header">
+		<h3 class="mt-2" style="text-align: center;">Danh Sách Tài Khoản</h3>
+	</div>
+    <div class="card-body">
+        <table class="table table-bordered">
+        	<thead class="bg-success text-white" style="font-variant: small-caps;">
+        		<tr>
+        			<th>Tài Khoản</th>
+        			<th>Họ Tên</th>
+        			<th>Email</th>
+        			<th>Số Điện Thoại</th>
+        			<th></th>
+        		</tr>
+        	</thead>
+        	<tbody>
+        		<tr ng-repeat="item in pager.items">
+        			<td>{{item.taikhoan}}</td>
+        			<td>{{item.ten}}</td>
+        			<td>{{item.email}}</td>
+        			<td>{{item.sdt}}</td>
+        			
+        			<td class="text-center">
+        				<button ng-click="edit(item)" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-warning">Sửa</button>
+        				
+        				<!-- Modal -->
+						<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h1 class="modal-title fs-5" id="exampleModalLabel">Sửa thông tin của tài khoản</h1>
+						        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						      </div>
+						      <div class="modal-body">
+						       <div class="col-sm-10"  >
+    			<div class="row col">
+    				<div class="form-group col-sm-8">
+    					<label>Tài Khoản</label>
+    					<input ng-model="form.taikhoan"  class="form-control"/>
+    				</div>
+    				<div class="form-group col-sm-8">
+    					<label>Mật Khẩu</label>
+    					<input ng-model="form.matkhau" class="form-control" type="password"/>
+    				</div>
+    				<div class="form-group col-sm-8">
+    					<label>Họ Tên</label>
+    					<input ng-model="form.ten" class="form-control"/>
+    				</div>
+    				<div class="form-group col-sm-8">
+    					<label>Email</label>
+    					<input ng-model="form.email" class="form-control" type="email"/>
+    				</div>
+    				<div class="form-group col-sm-8">
+    					<label>Giới Tính</label>
+    					<input ng-model="form.gioitinh" class="form-control" />
+    				</div>
+    				<div class="form-group col-sm-8">
+    					<label>Số Điện Thoai</label>
+    					<input ng-model="form.sdt" class="form-control" />
+    				</div>
+    			</div>
+    			<div class="row">
+    				<div class="form-group col-sm-8">
+    					<label>Chức Năng</label>
+    					<div class="form-control">
+    						<div class="form-check ps-0">
+						      	<label ng-repeat="r in roles" class="form-check-label me-2" for="inlineFormCheck">
+						      	<input ng-model="selectedRole" ng-value="r" class="form-check-input1" type="checkbox" id="inlineFormCheck" ng-checked="selection.indexOf(r)>-1" ng-click="toggleRole(r)">
+							        {{r.name}}
+							     </label>
+						    </div>
+    					</div>
+    				</div>
+    			</div>
+    			
+    		</div>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+						        <button  ng-click="update()" class="btn btn-primary">Cập Nhập</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+        				
+        				
+        
+        				<button ng-click="delete(item)"  class="btn btn-danger">Xóa Tài Khoản</button> 
+        			</td>
+        		</tr>
+        	</tbody>
+        </table>
+    </div>
+    <div class="card-footer text-center">
+    	<button ng-click="pager.first()" class="btn btn-danger" style="width: 42px;"><i class="fa-solid fa-backward-step"></i></button>
+    	<button ng-click="pager.previous()" class="btn btn-primary"><i class="fa-solid fa-backward"></i></button>
+    	<button class="btn btn-success">{{pager.page+1}} of {{pager.count}}</button>
+    	<button ng-click="pager.next()" class="btn btn-primary"><i class="fa-solid fa-forward"></i></button>
+    	<button ng-click="pager.last()" class="btn btn-danger" style="width: 42px;"><i class="fa-solid fa-forward-step"></i></button>
+    </div>
+</div>
+	</main>
+</body>
